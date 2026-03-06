@@ -8,7 +8,7 @@ with open("knowledge.json", "r") as file:
     knowledge = json.load(file)
 
 while True:
-    user_input = input("You: ").lower()
+    user_input = input("You: ").lower().strip()
 
     if user_input == "exit":
         print("Bot: Goodbye!")
@@ -16,9 +16,9 @@ while True:
 
     found = False
 
-    for issue in knowledge:
-        if issue in user_input:
-            print("Bot:", knowledge[issue])
+    for issue, solution in knowledge.items():
+        if issue.lower() in user_input:
+            print("Bot:", solution)
             found = True
             break
 
