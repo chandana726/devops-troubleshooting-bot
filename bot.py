@@ -14,7 +14,13 @@ while True:
         print("Bot: Goodbye!")
         break
 
-    if user_input in knowledge:
-        print("Bot:", knowledge[user_input])
-    else:
+    found = False
+
+    for issue in knowledge:
+        if issue in user_input:
+            print("Bot:", knowledge[issue])
+            found = True
+            break
+
+    if not found:
         print("Bot: Sorry, I don't know that issue yet.")
