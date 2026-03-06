@@ -1,0 +1,8 @@
+{
+  "pod restarting": "Check pod logs using 'kubectl logs <pod-name>'",
+  "high cpu": "Use 'top' or 'htop' to identify the process consuming CPU",
+  "disk full": "Run 'df -h' to check disk usage and clear unnecessary files",
+  "service down": "Check service status using 'systemctl status <service>'",
+  "kubernetes pod pending": "Check node resources and run 'kubectl describe pod <pod-name>'",
+  "container crashloopbackoff": "Inspect container logs using 'kubectl logs <pod-name>'"
+}
