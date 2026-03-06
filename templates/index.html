@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DevOps Troubleshooting Bot</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.container {
+    width: 600px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.chatbox {
+    background: #1e293b;
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.message {
+    margin: 10px 0;
+}
+
+.user {
+    color: #38bdf8;
+}
+
+.bot {
+    color: #22c55e;
+}
+
+.input-area {
+    display: flex;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>DevOps Troubleshooting Bot</h1>
+
+<div id="chatbox" class="chatbox">
+<div class="message bot">
+<b>Bot:</b> 👋 Welcome to the DevOps Troubleshooting Bot.<br><br>
+</div>
+</div>
+
+<div class="input-area">
+<input id="question" placeholder="Ask a DevOps question...">
+<button onclick="sendQuestion()">Send</button>
+<button onclick="clearChat()">Clear</button>
+</div>
+
+</div>
+
+<script>
+
+async function sendQuestion() {
+
+let question = document.getElementById("question").value;
+
+if(question.trim() === "") return;
+
+let chatbox = document.getElementById("chatbox");
+
+chatbox.innerHTML += `<div class="message user"><b>You:</b> ${question}</div>`;
+
+let response = await fetch("/ask", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({question: question})
+});
+
+let data = await response.json();
+
+chatbox.innerHTML += `<div class="message bot"><b>Bot:</b> ${data.answer}</div>`;
+
+chatbox.scrollTop = chatbox.scrollHeight;
+
+document.getElementById("question").value = "";
+
+}
+
+</script>
+<script>
+
+async function sendQuestion() {
+
+let question = document.getElementById("question").value;
+
+if(question.trim() === "") return;
+
+let chatbox = document.getElementById("chatbox");
+
+chatbox.innerHTML += `<div class="message user"><b>You:</b> ${question}</div>`;
+
+let response = await fetch("/ask", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({question: question})
+});
+
+let data = await response.json();
+
+chatbox.innerHTML += `<div class="message bot"><b>Bot:</b> ${data.answer}</div>`;
+
+chatbox.scrollTop = chatbox.scrollHeight;
+
+document.getElementById("question").value = "";
+
+}
+
+function clearChat() {
+document.getElementById("chatbox").innerHTML = `
+<div class="message bot">
+<b>Bot:</b> 👋 Welcome to the DevOps Troubleshooting Bot.<br><br>
+Ask about issues like:<br>
+• disk full<br>
+• high cpu<br>
+• pod restarting<br>
+• service down<br><br>
+Type <b>help</b> to see all supported issues.
+</div>
+`;
+}
+</script>
+</body>
+</html>
