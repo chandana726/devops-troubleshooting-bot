@@ -23,8 +23,8 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/devops-troubleshooting-bot:latest .
+        docker build -t chandanashettybs/devops-troubleshooting-bot:latest .
 
     - name: Push Docker Image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/devops-troubleshooting-bot:latest
+        docker push chandanashettybs/devops-troubleshooting-bot:latest
