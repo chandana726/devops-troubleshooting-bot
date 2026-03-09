@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-bot
+  template:
+    metadata:
+      labels:
+        app: devops-bot
+    spec:
+      containers:
+      - name: devops-bot
+        image: chandanashettybs/devops-troubleshooting-bot:latest
+        ports:
+          - containerPort: 5000
