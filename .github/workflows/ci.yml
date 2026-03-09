@@ -30,4 +30,18 @@ jobs:
     - name: Push Docker Image
       run: |
         docker push chandanashettybs/devops-troubleshooting-bot:latest
+          - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+    - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+    - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+
+    - name: Deploy with Helm
+        run: |
+          helm upgrade --install devops-bot ./devops-bot-chart -n devops-bot
         
